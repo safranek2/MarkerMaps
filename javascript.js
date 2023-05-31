@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     setTimeout(function () {
-      if (username === "správné-uživatelské-jméno" && password === "správné-heslo") {
+      if (username === "spravne-uzivatelske-jmeno" && password === "spravne-heslo") {
         alert("Přihlášení úspěšné!");
 
 
