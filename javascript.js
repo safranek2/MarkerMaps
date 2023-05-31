@@ -6,14 +6,20 @@ document.addEventListener("DOMContentLoaded", function () {
   var loginForm = document.querySelector("form");
 
 
+  
   loginForm.addEventListener("submit", function (event) {
     event.preventDefault(); 
+
+
 
 
     var usernameInput = loginForm.querySelector("input[name='rusername']");
     var passwordInput = loginForm.querySelector("input[name='rpassword']");
     var username = usernameInput.value;
     var password = passwordInput.value;
+
+
+
 
 
     setTimeout(function () {
@@ -31,6 +37,12 @@ document.addEventListener("DOMContentLoaded", function () {
       passwordInput.value = "";
     }, 1000);
   });
+
+
+
+
+
+
 
 
   function initializeMap() {
@@ -51,6 +63,13 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     }
   }
+
+
+
+
+
+
+
 
   function enableMarkerCreation() {
 
@@ -73,6 +92,12 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
 
+
+
+
+
+
+
   function addMarker(markerData) {
     var marker = L.marker([markerData.lat, markerData.lng]).addTo(map);
     marker.bindPopup(markerData.name).openPopup();
@@ -81,10 +106,23 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
 
+
+
+
+
+
+
   function saveMarkerToDatabase(markerData) {
     // Tady bysme měli provést nějaký "volání na backend server", který má uložit marker do databáze
 
   }
+
+
+
+
+
+
+
 
   // Načtení uložených značek z databáze
   function loadMarkersFromDatabase() {
@@ -92,6 +130,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     return null;
   }
+
+
+
+
+
 
 
   function deleteMarkers() {
@@ -103,6 +146,11 @@ document.addEventListener("DOMContentLoaded", function () {
     // Tady bysme měli provést "volání na backend server", který smaže markery z databáze
 
   }
+
+
+
+
+
 
 
   function enableMarkerEditing() {
@@ -121,6 +169,14 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     });
   }
+
+
+
+
+
+
+
+
 
 
   function updateMarkerInDatabase(markerData) {
