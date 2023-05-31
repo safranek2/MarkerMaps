@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
+
   var map;
   var markers = [];
 
@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
   var loginForm = document.querySelector("form");
 
 
-  
+
   loginForm.addEventListener("submit", function (event) {
     event.preventDefault(); 
 
@@ -54,6 +54,8 @@ document.addEventListener("DOMContentLoaded", function () {
       attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
       maxZoom: 18,
     }).addTo(map);
+
+  map.toggleFullscreen();
 
 
     var savedMarkers = loadMarkersFromDatabase();
@@ -183,4 +185,3 @@ document.addEventListener("DOMContentLoaded", function () {
     // Tady bysme měli provést "volání na backend server", který aktualizuje marker v databázi
 
   }
-});
