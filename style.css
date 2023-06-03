@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+#map {
+    height: 100%;
+}
+
+.leaflet-top {
+    right: 10px;
+    top: 10px;
+    z-index: 1000;
+    pointer-events: auto;
+}
