@@ -1,9 +1,5 @@
 # MarkerMaps
 
-## Název
-
-MarkerMaps
-
 ## Funkce webové stránky
 
 MarkerMaps je webová stránka umožňující uživatelům přidávat značky (marker) na mapu. Uživatelé mohou kliknout na mapu a vytvořit značku s vlastním názvem. Každá značka je uložena s jejími souřadnicemi a názvem. Uživatelé mohou také odstranit značky, které již nejsou potřebné.
