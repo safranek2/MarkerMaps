@@ -1,17 +1,10 @@
-
 var map;
 var markers = [];
 
-
 var loginForm = document.querySelector("form");
-
-
 
 loginForm.addEventListener("submit", function (event) {
   event.preventDefault();
-
-
-
 
   var usernameInput = loginForm.querySelector("input[name='rusername']");
   var passwordInput = loginForm.querySelector("input[name='rpassword']");
@@ -22,10 +15,7 @@ loginForm.addEventListener("submit", function (event) {
     if (username === "spravne-uzivatelske-jmeno" && password === "spravne-heslo") {
       alert("Přihlášení úspěšné!");
 
-
       initializeMap();
-      enableMarkerCreation();
-      enableMarkerEditing();
     } else {
       alert("Neplatné přihlašovací údaje!");
     }
@@ -34,50 +24,36 @@ loginForm.addEventListener("submit", function (event) {
   }, 1000);
 });
 
-function initializeMap() {
-
-  map = L.map('map').setView([49.74369357397428, 15.338693012913026], 8);
+  map = L.map('map').setView([49.74369357397428, 15.338693012913026], 8);;
 
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
-    maxZoom: 18,
+    attribution: 'Authors: David Šafránek, Jakub Svoboda, Ondřej Šembera',
   }).addTo(map);
+
+  L.marker([49.74369357397428, 15.338693012913026]).addTo(map)
+    .bindPopup('A pretty CSS popup.<br> Easily customizable.');
 
   map.toggleFullscreen();
 
-  var savedMarkers = loadMarkersFromDatabase();
-  if (savedMarkers) {
-    savedMarkers.forEach(function (markerData) {
-      addMarker(markerData);
-    });
-  }
+  map.on('click', addMarker);
+
+
+var popup = L.popup();
+
+function onMapClick(e) {
+    popup
+        .setLatLng(e.latlng)
+        .setContent("You clicked the map at " + e.latlng.toString())
+        .openOn(map);
 }
 
-function enableMarkerCreation() {
+map.on('click', onMapClick);
 
-  map.on('click', function (event) {
-    var latitude = event.latlng.lat;
-    var longitude = event.latlng.lng;
-
-
-    var markerData = {
-      lat: latitude,
-      lng: longitude,
-      name: prompt("Zadejte název místa:")
-    };
-
-    if (markerData.name) {
-      addMarker(markerData);
-      saveMarkerToDatabase(markerData);
-    }
+var savedMarkers = loadMarkersFromDatabase();
+if (savedMarkers) {
+  savedMarkers.forEach(function (markerData) {
+    addMarker(markerData);
   });
-}
-
-function addMarker(markerData) {
-  var marker = L.marker([markerData.lat, markerData.lng]).addTo(map);
-  marker.bindPopup(markerData.name).openPopup();
-
-  markers.push(marker);
 }
 
 function saveMarkerToDatabase(markerData) {
@@ -90,36 +66,4 @@ function loadMarkersFromDatabase() {
   // Tady bysme měli provést "volání na backend server", který načte markery z databáze
 
   return null;
-}
-
-function deleteMarkers() {
-  markers.forEach(function (marker) {
-    map.removeLayer(marker);
-  });
-  markers = [];
-
-  // Tady bysme měli provést "volání na backend server", který smaže markery z databáze
-
-}
-
-function enableMarkerEditing() {
-  markers.forEach(function (marker) {
-    marker.on('click', function (event) {
-      var newMarkerName = prompt("Zadejte nový název místa:");
-      if (newMarkerName) {
-        marker.setPopupContent(newMarkerName);
-        var markerData = {
-          lat: marker.getLatLng().lat,
-          lng: marker.getLatLng().lng,
-          name: newMarkerName
-        };
-        updateMarkerInDatabase(markerData);
-      }
-    });
-  });
-}
-
-function updateMarkerInDatabase(markerData) {
-  // Tady bysme měli provést "volání na backend server", který aktualizuje marker v databázi
-
 }
