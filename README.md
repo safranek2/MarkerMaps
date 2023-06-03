@@ -18,7 +18,7 @@ MarkerMaps je webová stránka umožňující uživatelům přidávat značky (m
 2. Otevřete soubor `index.html` ve vašem webovém prohlížeči.
 3. Webová stránka MarkerMaps by měla být nyní spuštěna a viditelná v prohlížeči.
 
-## Autor
+## Autoři
 
 - David Šafránek
 - Jakub Svoboda
