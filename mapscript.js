@@ -42,24 +42,6 @@ function createEnter(markerId, marker) {
     });
 }
 
-function removeMarker(index) {
-    if (index >= 0 && index < markers.length) {
-        let marker = markers[index];
-        map.removeLayer(marker);
-        markers.splice(index, 1);
-        updateMarkerIndexes();
-    }
-}
-
-function updateMarkerIndexes() {
-    markers.forEach(function (marker, index) {
-        marker.index = index;
-        let popupContent = marker.getPopup().getContent();
-        let newPopupContent = popupContent.replace(/removeMarker\(\d+\)/g, "removeMarker(" + index + ")");
-        marker.setPopupContent(newPopupContent);
-    });
-}
-
 function saveMarker(id, marker) {
     let markerNameInput = document.getElementById(`marker${id}`);
     let markerName = markerNameInput.value;
@@ -84,4 +66,22 @@ function saveMarker(id, marker) {
         removeMarker(marker.index);
     }
     currentMarker = null;
+}
+
+function removeMarker(index) {
+    if (index >= 0 && index < markers.length) {
+        let marker = markers[index];
+        map.removeLayer(marker);
+        markers.splice(index, 1);
+        updateMarkerIndexes();
+    }
+}
+
+function updateMarkerIndexes() {
+    markers.forEach(function (marker, index) {
+        marker.index = index;
+        let popupContent = marker.getPopup().getContent();
+        let newPopupContent = popupContent.replace(/removeMarker\(\d+\)/g, "removeMarker(" + index + ")");
+        marker.setPopupContent(newPopupContent);
+    });
 }
