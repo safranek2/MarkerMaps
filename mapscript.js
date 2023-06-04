@@ -8,6 +8,19 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© 2023 SPŠE Ječná by David Šafránek, Jakub Svoboda, Ondřej Šembera'
 }).addTo(map);
 
+if (typeof databaseMarkers !== 'undefined' && databaseMarkers.length > 0) {
+    for (let i = 0; i < databaseMarkers.length; i++) {
+        let marker = L.marker([databaseMarkers[i].latitude, databaseMarkers[i].longitude]).addTo(map).bindPopup(
+            `<div class="text-center"><p style="margin-bottom: 0;">${databaseMarkers[i].name}</p><button type="button" class="btn btn-sm btn-link" onclick="removeMarker(${i})">DELETE</button></div>`,
+            {
+                closeButton: false
+            }
+        );
+            markers.push(marker);
+        marker.index = i;
+    }
+}
+
 map.on('click', addMarker);
 
 function addMarker(e) {
@@ -72,7 +85,51 @@ function removeMarker(index) {
         map.removeLayer(marker);
         markers.splice(index, 1);
         updateMarkerIndexes();
+        let latlng = marker.getLatLng();
+
+        let markerData = {
+            lat: latlng.lat,
+            lng: latlng.lng,
+        };
+        deleteMarkerFromDatabase(markerData);
     }
+}
+function saveMarkerToDatabase(markerData) {
+    fetch('/save-marker.php', {
+        method: 'POST',
+        body: JSON.stringify({ latitude: markerData.lat, longitude: markerData.lng, name: markerData.name })
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not OK');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log(data);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
+function deleteMarkerFromDatabase(markerData) {
+    fetch('/delete-marker.php', {
+        method: 'POST',
+        body: JSON.stringify({ latitude: markerData.lat, longitude: markerData.lng })
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not OK');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log(data);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
 }
 
 function updateMarkerIndexes() {
@@ -81,17 +138,6 @@ function updateMarkerIndexes() {
         let popupContent = marker.getPopup().getContent();
         let newPopupContent = popupContent.replace(/removeMarker\(\d+\)/g, "removeMarker(" + index + ")");
         marker.setPopupContent(newPopupContent);
+        
     });
-}
-
-function saveMarkerToDatabase(markerData) {
-
-}
-
-function loadMarkerFromDatabase() {
-
-}
-
-function loadMarker(markerData) {
-
 }
