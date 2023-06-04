@@ -22,8 +22,7 @@ function addMarker(e) {
             {
                 closeButton: false
             }
-        ).off('click')
-        .openPopup();
+        ).openPopup()
 
     currentMarker = marker;
     createEnter(markerId, marker);
@@ -50,9 +49,6 @@ function saveMarker(id, marker) {
         let index = marker.index;
         marker.setPopupContent(
             `<div class="text-center"><p style="margin-bottom: 0;">${markerName}</p><button type="button" class="btn btn-sm btn-link" onclick="removeMarker(${index})">DELETE</button></div>`,
-            {
-                closeButton: true
-            }
         )
 
         let latlng = marker.getLatLng();
@@ -62,6 +58,8 @@ function saveMarker(id, marker) {
             lng: latlng.lng,
             name: markerName
         };
+
+        saveMarkerToDatabase(markerData);
     } else {
         removeMarker(marker.index);
     }
@@ -84,4 +82,16 @@ function updateMarkerIndexes() {
         let newPopupContent = popupContent.replace(/removeMarker\(\d+\)/g, "removeMarker(" + index + ")");
         marker.setPopupContent(newPopupContent);
     });
+}
+
+function saveMarkerToDatabase(markerData) {
+
+}
+
+function loadMarkerFromDatabase() {
+
+}
+
+function loadMarker(markerData) {
+
 }
