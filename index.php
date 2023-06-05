@@ -37,7 +37,7 @@ session_start();
             $username = $_POST["rusername"];
             $password = $_POST["rpassword"];
             $hash = password_hash($password, PASSWORD_DEFAULT);
-            $sql = "INSERT INTO user (username, password)  VALUES ('$username', '$hash')";
+            $sql = "INSERT INTO _user (username, password)  VALUES ('$username', '$hash')";
             try {
                 mysqli_query($conn, $sql);
                 $_SESSION["rusername"] = $username;
