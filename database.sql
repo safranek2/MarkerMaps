@@ -1,10 +1,10 @@
 CREATE DATABASE MarkerMaps
 USE MarkerMaps
 
-create table _user (
+create table user (
     id_use INT AUTO_INCREMENT PRIMARY KEY,
-    uz_jmen varchar(15),
-    heslo char(200)
+    username varchar(15),
+    password char(200)
 );
 
 CREATE TABLE marker (

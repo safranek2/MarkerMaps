@@ -5,7 +5,7 @@
     $latitude = $data['latitude'];
     $longitude= $data['longitude'];
     $name= $data['name'];
-    $id = $_SESSION['id_uz'];
+    $id = $_SESSION['id_use'];
     $sql ="INSERT INTO marker( latitude, longitude, name, id_use) VALUES ($latitude,$longitude,'$name',$id)";
     $respose = mysqli_query($conn, $sql);
     echo json_encode($response);

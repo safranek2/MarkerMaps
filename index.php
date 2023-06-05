@@ -37,7 +37,7 @@ session_start();
             $username = $_POST["rusername"];
             $password = $_POST["rpassword"];
             $hash = password_hash($password, PASSWORD_DEFAULT);
-            $sql = "INSERT INTO uzivatel (uz_jmen, heslo)  VALUES ('$username', '$hash')";
+            $sql = "INSERT INTO user (use_name, password)  VALUES ('$username', '$hash')";
             try {
                 mysqli_query($conn, $sql);
                 $_SESSION["rusername"] = $username;
@@ -51,15 +51,15 @@ session_start();
             $username = $_POST["rusername"];
             $password = $_POST["rpassword"];
             $hash = password_hash($password, PASSWORD_DEFAULT);
-            $sql = "SELECT id_uz, heslo FROM uzivatel WHERE uz_jmen='$username'";
+            $sql = "SELECT id_use, heslo FROM uzivatel WHERE username='$username'";
             $result = mysqli_query($conn, $sql);
 
             if (mysqli_num_rows($result) > 0) {
                 $row = mysqli_fetch_assoc($result);
-                if (password_verify($password, $row["heslo"])) {
+                if (password_verify($password, $row["password"])) {
                     $_SESSION["rusername"] = $username;
                     $_SESSION["rpassword"] = $password;
-                    $_SESSION["id_uz"] = $row["id_uz"];
+                    $_SESSION["id_use"] = $row["id_use"];
                     header("Location: map.php");
                 } else {
                     echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">Wrong username or password<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
