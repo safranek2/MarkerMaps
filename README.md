@@ -21,10 +21,11 @@ MarkerMaps je webová stránka umožňující uživatelům přidávat značky (m
 3. Zkopírujte projektové soubory do složky htdocs ve vašem XAMPP adresáři.
 4. Spusťte XAMPP Control Panel a spusťte Apache server.
 5. Otevřete správce databáze (například phpMyAdmin).
-6. Vytvořte si databázi MarkerMaps a v novém query otevřete database.sql.
+6. Vytvořte si databázi a v novém query spusťte database.sql.
 7. Uložte tabulky a databázi.
-8. Otevřete webový prohlížeč a zadejte adresu http://localhost/MarkerMaps/index.html.
-9. Webová stránka MarkerMaps by měla být nyní spuštěna a viditelná v prohlížeči.
+8. V souboru database.php přepište $db_name na název databáze
+9. Otevřete webový prohlížeč a zadejte adresu http://localhost/MarkerMaps/index.html.
+10. Webová stránka MarkerMaps by měla být nyní spuštěna a viditelná v prohlížeči.
 
 ## Autoři
 

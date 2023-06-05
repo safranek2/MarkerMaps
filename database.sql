@@ -1,8 +1,7 @@
-
-create table _user (
-    id_use INT AUTO_INCREMENT PRIMARY KEY,
-    username varchar(15),
-    password char(200)
+create table uzivatel (
+    id_uz INT AUTO_INCREMENT PRIMARY KEY,
+    uz_jmen varchar(15),
+    heslo char(200)
 );
 
 CREATE TABLE marker (

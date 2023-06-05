@@ -2,7 +2,7 @@
     $db_server = "localhost";
     $db_user = "root";
     $db_pass = "";
-    $db_name ="MarkerMaps";
+    $db_name ="map_user_database";
     $conn = "";
 
     try{

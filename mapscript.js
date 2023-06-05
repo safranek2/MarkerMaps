@@ -16,7 +16,7 @@ if (typeof databaseMarkers !== 'undefined' && databaseMarkers.length > 0) {
                 closeButton: false
             }
         );
-        markers.push(marker);
+            markers.push(marker);
         marker.index = i;
     }
 }
@@ -99,18 +99,18 @@ function saveMarkerToDatabase(markerData) {
         method: 'POST',
         body: JSON.stringify({ latitude: markerData.lat, longitude: markerData.lng, name: markerData.name })
     })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not OK');
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log(data);
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not OK');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log(data);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
 }
 
 function deleteMarkerFromDatabase(markerData) {
@@ -118,18 +118,18 @@ function deleteMarkerFromDatabase(markerData) {
         method: 'POST',
         body: JSON.stringify({ latitude: markerData.lat, longitude: markerData.lng })
     })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not OK');
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log(data);
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not OK');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log(data);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
 }
 
 function updateMarkerIndexes() {
@@ -138,6 +138,6 @@ function updateMarkerIndexes() {
         let popupContent = marker.getPopup().getContent();
         let newPopupContent = popupContent.replace(/removeMarker\(\d+\)/g, "removeMarker(" + index + ")");
         marker.setPopupContent(newPopupContent);
-
+        
     });
 }
