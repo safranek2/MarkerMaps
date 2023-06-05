@@ -37,7 +37,7 @@ session_start();
             $username = $_POST["rusername"];
             $password = $_POST["rpassword"];
             $hash = password_hash($password, PASSWORD_DEFAULT);
-            $sql = "INSERT INTO user (use_name, password)  VALUES ('$username', '$hash')";
+            $sql = "INSERT INTO user (username, password)  VALUES ('$username', '$hash')";
             try {
                 mysqli_query($conn, $sql);
                 $_SESSION["rusername"] = $username;
@@ -51,7 +51,7 @@ session_start();
             $username = $_POST["rusername"];
             $password = $_POST["rpassword"];
             $hash = password_hash($password, PASSWORD_DEFAULT);
-            $sql = "SELECT id_use, heslo FROM uzivatel WHERE username='$username'";
+            $sql = "SELECT id_use, password FROM _user WHERE username='$username'";
             $result = mysqli_query($conn, $sql);
 
             if (mysqli_num_rows($result) > 0) {

@@ -1,5 +1,3 @@
-CREATE DATABASE MarkerMaps
-USE MarkerMaps
 
 create table user (
     id_use INT AUTO_INCREMENT PRIMARY KEY,
