@@ -1,5 +1,5 @@
 
-create table user (
+create table _user (
     id_use INT AUTO_INCREMENT PRIMARY KEY,
     username varchar(15),
     password char(200)
